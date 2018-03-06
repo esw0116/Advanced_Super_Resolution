@@ -38,8 +38,8 @@ def main():
 
     print("===> Loading datasets")
     train_set = load_data(img_addr='./DIV2K/DIV2K_train_LR_bicubic/X4', lbl_addr='./DIV2K/DIV2K_train_HR',
-                          transform=transforms.Compose(transforms.RandomCrop(96),
-                                                       transforms.ToTensor()))
+                          transform=transforms.Compose([transforms.RandomCrop(96),
+                                                       transforms.ToTensor()]))
     training_data_loader = DataLoader(dataset=train_set, num_workers=opt.threads,
                                       batch_size=opt.batchSize, shuffle=True)
 
