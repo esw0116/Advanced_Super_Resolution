@@ -54,7 +54,7 @@ class SRResNet(nn.Module):
         )
         self.brb = big_residual_block()
         self.after_brb = nn.Sequential(
-            nn.Conv2d(in_channels=3, out_channels=64, kernel_size=(3, 3), padding=1),
+            nn.Conv2d(in_channels=64, out_channels=64, kernel_size=(3, 3), padding=1),
             nn.PixelShuffle(2),
             nn.PReLU(),
             nn.Conv2d(in_channels=64, out_channels=64, kernel_size=(3, 3), padding=1),
