@@ -52,20 +52,16 @@ class SRResNet(nn.Module):
             nn.Conv2d(in_channels=3, out_channels=64, kernel_size=(9, 9), padding=4),
             nn.PReLU()
         )
-        self.brb = self.apply_brb()
+        self.brb = big_residual_block()
         self.after_brb = nn.Sequential(
-            nn.Conv2d(in_channels=64, out_channels=64, kernel_size=(3, 3), padding=1),
+            nn.Conv2d(in_channels=64, out_channels=256, kernel_size=(3, 3), padding=1),
             nn.PixelShuffle(2),
             nn.PReLU(),
-            nn.Conv2d(in_channels=64, out_channels=64, kernel_size=(3, 3), padding=1),
+            nn.Conv2d(in_channels=64, out_channels=256, kernel_size=(3, 3), padding=1),
             nn.PixelShuffle(2),
             nn.PReLU(),
-            nn.Conv2d(in_channels=16, out_channels=3, kernel_size=(3, 3), padding=1),
+            nn.Conv2d(in_channels=64, out_channels=3, kernel_size=(3, 3), padding=1),
         )
-
-    def apply_brb(self):
-        layers = big_residual_block()
-        return nn.Sequential(*layers)
 
     def forward(self, x):
         x = self.before_brb(x)
