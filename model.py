@@ -60,7 +60,7 @@ class SRResNet(nn.Module):
             nn.Conv2d(in_channels=64, out_channels=64, kernel_size=(3, 3), padding=1),
             nn.PixelShuffle(2),
             nn.PReLU(),
-            nn.Conv2d(in_channels=64, out_channels=3, kernel_size=(3, 3), padding=1),
+            nn.Conv2d(in_channels=16, out_channels=3, kernel_size=(3, 3), padding=1),
         )
 
     def forward(self, x):
